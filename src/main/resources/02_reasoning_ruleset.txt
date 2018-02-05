@@ -65,11 +65,11 @@
 # transforming availability % in downtime %
 ##################################################
 [CONSTRUCT {
-	?cs bpaas:cloudServiceHasDowntimeInPercent ?downtimeInPercent .
+ ?cs bpaas:cloudServiceHasMonthlyDowntimeInMinute ?downtimeInPercent .
 } WHERE {
-	?cs rdf:type bpaas:CloudService .
-	?cs bpaas:cloudServiceHasAvailabilityInPercent ?availability .
-	BIND (100-?availability AS ?downtimeInPercent) 
+ ?cs rdf:type bpaas:CloudService .
+ ?cs bpaas:cloudServiceHasAvailabilityInPercent ?availability .
+ BIND ((100-?availability)/100*43200 AS ?downtimeInPercent) 
 }]
 
 ##################################################
